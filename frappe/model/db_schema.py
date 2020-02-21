@@ -534,9 +534,7 @@ class DbManager:
 	def grant_all_privileges(self, target, user, host=None):
 		if not host:
 			host = self.get_current_host()
-
-		self.db.sql("GRANT ALL PRIVILEGES ON `%s`.* TO '%s'@'%s';" % (target,
-			user, host))
+			self.db.sql("GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP,  INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, REFERENCES, GRANT OPTION, ALTER ROUTINE, TRIGGER ON `%s`.* TO '%s'@'%s';" % (target, user, host))
 
 	def grant_select_privilges(self, db, table, user, host=None):
 		if not host:
