@@ -47,12 +47,7 @@ class DbManager:
 	def grant_all_privileges(self, target, user, host=None):
 		if not host:
 			host = self.get_current_host()
-
-		if frappe.conf.get('rds_db', 0) == 1:
-			self.db.sql("GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, CREATE VIEW, EVENT, TRIGGER, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EXECUTE ON `%s`.* TO '%s'@'%s';" % (target, user, host))
-		else:
-			self.db.sql("GRANT ALL PRIVILEGES ON `%s`.* TO '%s'@'%s';" % (target, user, host))
-
+			self.db.sql("GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP,  INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, REFERENCES, GRANT OPTION, ALTER ROUTINE, TRIGGER ON `%s`.* TO '%s'@'%s';" % (target, user, host))
 	def flush_privileges(self):
 		self.db.sql("FLUSH PRIVILEGES")
 
